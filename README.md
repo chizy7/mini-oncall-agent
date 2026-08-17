@@ -12,3 +12,9 @@ A user reports a production issue such as:
 Users report that the API is very slow.
 ```
 The agent then investigates the system by deciding which tools to use.
+
+## System Design
+
+A high level overview of the system:
+
+<img src="assets/system_design.png" width="800">
