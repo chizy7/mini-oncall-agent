@@ -7,15 +7,17 @@ SERVICES = {
             "memory_percent": 43,
             "latency_ms": 95,
             "error_rate_percent": 0.1,
+        },
 
         "logs": [
             "INFO GET / 200 91ms",
             "INFO GET /dashboard 200 102ms",
             "INFO frontend health check passed",
         ],
+
         "dependencies": ["api"],
-        },
     },
+
     "api": {
         "health": "degraded",
 
@@ -24,6 +26,7 @@ SERVICES = {
             "memory_percent": 58,
             "latency_ms": 4200,
             "error_rate_percent": 11.8,
+        },
 
         "logs": [
             "ERROR request_id=a91 /checkout database timeout while acquiring connection",
@@ -31,9 +34,10 @@ SERVICES = {
             "WARN upstream database response exceeded 3000ms",
             "INFO request_id=c22 /health 200 12ms",
         ],
-        "dependencies": ["datavase"],
-        },
+
+        "dependencies": ["database"],
     },
+
     "database": {
         "health": "degraded",
 
@@ -44,6 +48,7 @@ SERVICES = {
             "error_rate_percent": 6.4,
             "active_connections": 99,
             "max_connections": 100,
+        },
 
         "logs": [
             "WARN connection pool usage 99/100",
@@ -51,18 +56,19 @@ SERVICES = {
             "WARN query waiting for available connection",
             "INFO checkpoint complete",
         ],
+
         "dependencies": [],
-        },
     },
 }
 
 
 if __name__ == "__main__":
-    print("Prodcution Services")
+    print("Production Services")
     print("===================")
 
     for service, data in SERVICES.items():
         print(
             f"{service}: "
             f"health={data['health']}, "
-            f"latency={data['metrics']['latency_ms']}ms")
+            f"latency={data['metrics']['latency_ms']}ms"
+        )
