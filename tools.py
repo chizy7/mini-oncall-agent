@@ -136,7 +136,84 @@ TOOL_SCHEMAS = [
             "Check whether a production service is "
             "healthy or degraded."
         ),
-        "parameters":{
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "service": {
+                    "type": "string",
+                    "enum": [
+                        "frontend",
+                        "api",
+                        "database",
+                    ],
+                }
+            },
+            "required": ["service"],
+            "additionalProperties": False,
+        },
+        "strict": True,
+    },
+
+    {
+        "type": "function",
+        "name": "get_service_metrics",
+        "description": (
+            "Get current production metrics for a service, "
+            "including CPU, memory, latency, errors, "
+            "and connection usage when available."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "service": {
+                    "type": "string",
+                    "enum": [
+                        "frontend",
+                        "api",
+                        "database",
+                    ],
+                }
+            },
+            "required": ["service"],
+            "additionalProperties": False,
+        },
+        "strict": True,
+    },
+
+    {
+        "type": "function",
+        "name": "get_service_logs",
+        "description": (
+            "Get recent application logs for a production "
+            "service. Useful for finding errors, warnings, "
+            "and timeouts."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "service": {
+                    "type": "string",
+                    "enum": [
+                        "frontend",
+                        "api",
+                        "database",
+                    ],
+                }
+            },
+            "required": ["service"],
+            "additionalProperties": False,
+        },
+        "strict": True,
+    },
+
+    {
+        "type": "function",
+        "name": "get_service_dependencies",
+        "description": (
+            "Get the downstream production services that "
+            "a service depends on."
+        ),
+        "parameters": {
             "type": "object",
             "properties": {
                 "service": {
